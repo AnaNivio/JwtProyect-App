@@ -77,10 +77,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Un-secure H2 Database
                 .antMatchers("/h2-console/**/**").permitAll()
 
+                // Un-secure login
                 .antMatchers("/auth/**").permitAll()
 
-                .antMatchers("/user/**").permitAll()
+                //Secure user controller
+                .antMatchers("/user/**").hasRole("USER")
 
+                //Secure admin controller
                 .antMatchers("/admin/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated();
