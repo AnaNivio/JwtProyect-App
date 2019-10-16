@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Un-secure login
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/refresh/**").permitAll()
 
                 //Secure user controller
                 .antMatchers("/user/**").hasRole("USER")
