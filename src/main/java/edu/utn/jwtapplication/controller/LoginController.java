@@ -1,12 +1,9 @@
 package edu.utn.jwtapplication.controller;
 
-import edu.utn.jwtapplication.models.JwtAuthenticationResponse;
-import okhttp3.Call;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 @RestController
 @CrossOrigin
@@ -53,7 +54,7 @@ public class LoginController {
         }
 
         // Send token to client, and error message if status is not 200
-        return ResponseEntity.status(responseStatus).body(responseBody);
+        return new ResponseEntity<>(responseBody, HttpStatus.valueOf(responseStatus));
     }
 
     @RequestMapping(value = "/refresh", method = RequestMethod.GET)

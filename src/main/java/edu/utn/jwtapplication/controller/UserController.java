@@ -1,23 +1,21 @@
 package edu.utn.jwtapplication.controller;
 
-import edu.utn.jwtapplication.jwt.JwtAuthorizationTokenFilter;
-import edu.utn.jwtapplication.models.JwtTokenUtil;
-import edu.utn.jwtapplication.models.JwtUser;
-import edu.utn.jwtapplication.models.User;
-import io.jsonwebtoken.Jwt;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import edu.utn.jwtapplication.models.JwtTokenUtil;
+import edu.utn.jwtapplication.models.JwtUser;
 
 @RestController
 @RequestMapping("/user")
@@ -54,6 +52,8 @@ public class UserController {
 
     @RequestMapping(value = "greeting", method = RequestMethod.GET)
     public ResponseEntity<?> getUserGreeting() {
-        return ResponseEntity.ok("Greetings from user!");
+        HashMap<String, String> json = new HashMap<>();
+        json.put("message", "Greetings from user!");
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 }
